@@ -1,3 +1,5 @@
+package learn.jdbc.mybatis.InterfaceDao;
+
 import learn.jdbc.mybatis.modal.Test;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
