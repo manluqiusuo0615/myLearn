@@ -1,4 +1,5 @@
 import learn.jdbc.mybatis.modal.Test;
+import learn.jdbc.mybatis.modal.TestDaoImp;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -61,9 +62,39 @@ public class MybatisFirst {
         sqlSession.close();
     }
 
+    public void getDataForDao(Test test) throws IOException {
+        // mybatis配置文件
+        String resource = "SqlMapConfig.xml";
+        // 得到配置文件流
+        InputStream inputStream =  Resources.getResourceAsStream(resource);
+        //创建会话工厂，传入mybatis配置文件的信息
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        TestDaoImp testDaoImp = new TestDaoImp(sqlSessionFactory);
+
+        System.out.println(testDaoImp.getOne(test).toString());
+    }
+
+    public void getData2ForDao(Test test) throws IOException{
+        // mybatis配置文件
+        String resource = "SqlMapConfig.xml";
+        // 得到配置文件流
+        InputStream inputStream =  Resources.getResourceAsStream(resource);
+        //创建会话工厂，传入mybatis配置文件的信息
+        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+
+        TestDaoImp testDaoImp = new TestDaoImp(sqlSessionFactory);
+
+        System.out.println(testDaoImp.getAll(test).toString());
+    }
     public static void main(String[] args) throws IOException {
         MybatisFirst mf = new MybatisFirst();
         //mf.findUserByIdTest();
-        mf.findUserByNameTest();
+        //mf.findUserByNameTest();
+        Test test = new Test();
+        test.setRybh("001");
+        mf.getDataForDao(test);
+        test.setRybh("00");
+        mf.getData2ForDao(test);
     }
 }
