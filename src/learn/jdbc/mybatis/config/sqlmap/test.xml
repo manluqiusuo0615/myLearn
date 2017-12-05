@@ -28,7 +28,7 @@
 	${rybh}：接收输入参数的内容，如果传入类型是简单类型，${}中只能使用value
 	 -->
     <select id="findUserByName" parameterType="java.lang.String" resultType="learn.jdbc.mybatis.modal.Test">
-        SELECT * FROM user WHERE rybh LIKE '%${value}%'
+        SELECT * FROM persontable WHERE rybh LIKE '%${value}%'
     </select>
 
 
