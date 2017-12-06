@@ -1,5 +1,6 @@
 package learn.jdbc.mybatis.InterfaceDao;
 
+import learn.jdbc.mybatis.modal.Test;
 import java.util.List;
 
 /**
@@ -7,7 +8,7 @@ import java.util.List;
  * @description
  * @date 2017年12月05日 15:05
  */
-public interface Mapper<T> {
-    public T getOne(T t);
-    public List<T> getAll(T t);
+public interface Mapper {
+    public Test getOne(Test t);
+    public List<Test> getAll(Test t);
 }

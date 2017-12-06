@@ -20,7 +20,7 @@ public class InterfaceTest {
         InputStream inputStream =  Resources.getResourceAsStream(resource);
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         SqlSession sqlSession = sqlSessionFactory.openSession();
-        MapperDao mapperDao = sqlSession.getMapper(MapperDao.class);
+        Mapper mapperDao = sqlSession.getMapper(Mapper.class);
         Test test = new Test();
         test.setRybh("001");
         Test back = mapperDao.getOne(test);
