@@ -1,6 +1,7 @@
 package learn.collection.Map;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -22,8 +23,15 @@ public class Test1 {
         map.put("9","周七");
         map.put("0","周七");
 
-        for(Map.Entry<String,String> entry:map.entrySet()){
+        //for(Map.Entry<String,String> entry:map.entrySet()){
+        //    System.out.println("====================");
+        //    System.out.println("key:"+entry.getKey());
+        //    System.out.println("value:"+entry.getValue());
+        //}
 
+        Iterator<String> iterator = map.keySet().iterator();
+        while(iterator.hasNext()){
+            System.out.println(iterator.next());
         }
     }
 }
