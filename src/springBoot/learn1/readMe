@@ -1,0 +1,19 @@
+Spring Boot介绍
+Spring Boot的目的在于创建和启动新的基于Spring框架的项目。
+Spring Boot会选择最适合的Spring子项目和第三方开源库进行
+整合。大部分Spring Boot应用只需要非常少的配置就可以快速
+运行起来。
+Spring Boot是伴随着Spring4.0诞生的
+Spring Boot提供了一种快速使用Spring的方式
+
+特点：
+为基于Spring的开发提供更快的入门体验
+创建可以独立运行的Spring应用
+直接嵌入Tomcat或Jetty服务器,不需要打包成WAR文件
+提供推荐的基础POM文件(starter)来简化Apache Maven配置
+尽可能的根据项目依赖来自动配置Spring框架
+提供可以直接在生产环境中使用的功能，如性能指标，应用信息和应用
+健康检查
+开箱即用，没有代码生成，也无需xml配置，同时可以修改默认来满足
+特定的需求
+其他大量的项目都是基于spring boot之上的，如spring cloud

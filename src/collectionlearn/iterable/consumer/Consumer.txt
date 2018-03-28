@@ -1,0 +1,11 @@
+Consumer接口
+用于接收一个输入参数并处理，不返回任何值
+这个接口含有两个方法，accept()方法用于处理输入的参数
+andThen()方法用于链式处理
+void accept(T t);
+default Consumer<T> andThen(Consumer<? super T> after) {
+    Objects.requireNonNull(after);
+    return (T t) -> { accept(t); after.accept(t); };
+}
+该方法返回一个Consumer对象C，调用者Consumer对象设为A，
+输入参数Consumer对象设为B，C的accept()方法执行体是A.accept() + B.accept()

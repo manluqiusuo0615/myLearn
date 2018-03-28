@@ -1,0 +1,11 @@
+在Map接口中有一个内部接口(类) Entry<k,v>
+    K getKey();
+    V getValue();
+    V setValue(V value);
+    boolean equals(Object o);
+    int hashCode();
+里面有一系列抽象方法。
+而本身的Map接口中也有一系列抽象方法和非抽象方法
+
+
+
