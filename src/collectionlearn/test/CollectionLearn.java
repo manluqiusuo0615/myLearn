@@ -1,5 +1,6 @@
 package collectionlearn.test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,5 +9,5 @@ import java.util.List;
  * @date 2018年03月27日 9:04
  */
 public class CollectionLearn {
-    private List<String> list ;
+    private List<String> list = new ArrayList<String>();
 }
