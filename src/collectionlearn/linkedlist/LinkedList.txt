@@ -1,0 +1,417 @@
+LinkedList继承了抽象类AbstractSequentialList,并且实现了
+List,Deque,Cloneable,Serializable
+
+
+作用域     当前类    同一package   子孙类     其他package
+public        √          √            √           √
+protected     √          √            √           ×
+friendly      √          √            ×           ×
+private       √          ×            ×           ×
+
+
+//定义了一个不可序列化的变量size  初始值为0
+transient int size = 0;
+//有两个指针
+//一个指向头first   一个指向尾last
+//定义了一个类型为Node的变量  first
+//这个Node类型其实是LinkedList的静态内部类
+transient Node<E> first;
+//定义了一个类型为Node的变量  last
+transient Node<E> last;
+
+
+//这个静态内部类有三个属性
+//分别是  泛型类行的 item 属性
+//Node类型的 next 属性
+//node类型的 prev 属性
+//双向的链表
+private static class Node<E> {
+	//当前  节点  对象
+        E item;
+	//指向  节点的 下一个对象
+        Node<E> next;
+	//指向  节点的 上一个对象
+        Node<E> prev;
+
+        Node(Node<E> prev, E element, Node<E> next) {
+            this.item = element;
+            this.next = next;
+            this.prev = prev;
+        }
+    }
+//无参构造1
+public LinkedList() {}
+//构造 2
+public LinkedList(Collection<? extends E> c) {
+        this();
+        addAll(c);
+    }
+//linkFirst方法是私有的
+//在第一个节点前面添加一个节点
+private void linkFirst(E e) {
+	//定义一个不可修改的对象f指针  指向 first
+	//first节点指向头，把头结点保存在f中
+        final Node<E> f = first;
+	//创建一个新对象
+	//该对象中的 next 指针 属性指向  f ，即也指向了 first
+	//而该对象中的 元素  为传入的e  而该对象的属性 prev 指向 f
+	//创建新节点，新节点的前一个为null，因为新建的节点是要添加链表的头，所以他的前一个是为null
+	//新节点的下一个是f，这是因为新节点是要添加到f的前面的
+        final Node<E> newNode = new Node<>(null, e, f);
+	//将新创建的对象  赋值给  first  指针
+	//让新节点等于头结点
+        first = newNode;
+	//如果原来头结点为空，说明原来的链表为null，
+	//在创建第一个节点的时候first和last要指向同一个节点。
+        if (f == null)
+            last = newNode;
+        else
+	//如果原来链表不是null，让新节点等于原来头结点的前一个
+            f.prev = newNode;
+	//链表数量加1
+        size++;
+	//这个加是对链表操作的时候加，在Iterator遍历的时候是禁止操作的，否则要抛异常
+        modCount++;
+    }
+//在链表之前插入数据修改表头指针
+//第一句话的意思是建立一个新节点它的地址指向原先的表头指针
+//然后再将新节点赋值给原先的表头指针（现在是这个链表的第一个节点）
+//因为带表头指针的单项链表的表头指针是不予修改的（一般不存放data）
+//你插入的节点要在表头节点与第一个节点之间
+
+//添加到最后
+void linkLast(E e) {
+        final Node<E> l = last;
+	//新节点的前一个属性  指向以前的 last
+	//当前为  e
+	//下一个指向  null
+	//创建新节点，新节点的前一个是last，后一个为null，因为新节点就是最后一个，所以后一个要为null
+        final Node<E> newNode = new Node<>(l, e, null);
+	//将  以前的  last  重新 指向  为 新创建的节点
+        last = newNode;
+        if (l == null)
+	    //如果之前的链表是null的，则first和last都要指向同一个节点
+            first = newNode;
+        else
+	    //让当前节点成为之前链表last的下一个
+            l.next = newNode;
+        size++;
+        modCount++;
+    }
+
+
+    linkFirst(E e):
+	该方法就是添加一个节点 成为 LinkedList集合的第一个节点
+	也即向  集合  首段  添加  元素
+    linkLast(E e):
+	该方法就是添加一个节点 成为 LinkedList集合的最后一个节点
+	也即向  集合  末端  添加   元素
+
+//他表示插入一个新节点e到succ节点的前面
+void linkBefore(E e, Node<E> succ) {
+        // assert succ != null;
+	//首先succ节点要存在，否则要抛空指针异常，然后获取他的前一个节点
+        final Node<E> pred = succ.prev;
+	//创建新节点，新节点是前一个是pred，也就是succ的前一个，后一个是succ
+        final Node<E> newNode = new Node<>(pred, e, succ);
+	//新节点等于succ的前一个
+        succ.prev = newNode;
+	//pred等于null，说明succ是first节点，既然添加到succ的前面，所以就让新节点成为first节点
+        if (pred == null)
+            first = newNode;
+        else
+	    //让pred的下一个节点指向新节点
+            pred.next = newNode;
+        size++;
+        modCount++;
+    }
+
+    上面的几个操作，都是先用一个不可变的变量进行存储已经存在的值
+    然后将已经存在的值进行重新指向
+    这里重新指向的都是新创建的那个对象
+
+//删除first节点，f就是first节点
+private E unlinkFirst(Node<E> f) {
+	// assert f == first && f != null;
+	final E element = f.item;
+	final Node<E> next = f.next;
+	f.item = null;
+	f.next = null; // help GC
+	//让f的下一个节点成为first节点
+	first = next;
+	if (next == null)
+	    //如果next为null，说明之前就一个first节点，删除之后就没有节点，所以只好让last节点指向null
+	    last = null;
+	else
+	    next.prev = null;
+	size--;
+	modCount++;
+	return element;
+}
+
+private E unlinkLast(Node<E> l) {
+        // assert l == last && l != null;
+        final E element = l.item;
+        final Node<E> prev = l.prev;
+        l.item = null;
+        l.prev = null; // help GC
+        last = prev;
+        if (prev == null)
+            first = null;
+        else
+            prev.next = null;
+        size--;
+        modCount++;
+        return element;
+}
+//其实删除x节点很简单，就是让x的前一个和后一个连接就行了，
+//不过还要考虑前一个和后一个是否为空的问题
+E unlink (Node<E> x) {
+        // assert x != null;
+        final E element = x.item;
+        final Node<E> next = x.next;
+        final Node<E> prev = x.prev;
+
+        if (prev == null) {
+            first = next;
+        } else {
+            prev.next = next;
+            x.prev = null;
+        }
+
+        if (next == null) {
+            last = prev;
+        } else {
+            next.prev = prev;
+            x.next = null;
+        }
+        x.item = null;
+        size--;
+        modCount++;
+        return element;
+}
+
+public E getFirst() {
+        final Node<E> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return f.item;
+    }
+
+public E getLast() {
+        final Node<E> l = last;
+        if (l == null)
+            throw new NoSuchElementException();
+        return l.item;
+    }
+
+public E removeFirst() {
+        final Node<E> f = first;
+        if (f == null)
+            throw new NoSuchElementException();
+        return unlinkFirst(f);
+    }
+
+public E removeLast() {
+        final Node<E> l = last;
+        if (l == null)
+            throw new NoSuchElementException();
+        return unlinkLast(l);
+    }
+
+public void addFirst(E e) {
+        linkFirst(e);
+    }
+
+public void addLast(E e) {
+        linkLast(e);
+    }
+
+public boolean contains(Object o) {
+        return indexOf(o) != -1;
+    }
+
+public int size() {
+        return size;
+    }
+//所以  Linked List中的增加功能
+//永远是往最后的位置添加元素
+public boolean add(E e) {
+        linkLast(e);
+        return true;
+    }
+
+public boolean remove(Object o) {
+	//对链表遍历
+	//找到之后删除
+        if (o == null) {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (x.item == null) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        } else {
+            for (Node<E> x = first; x != null; x = x.next) {
+                if (o.equals(x.item)) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+public boolean addAll(Collection<? extends E> c) {
+        return addAll(size, c);
+    }
+
+public boolean addAll(int index, Collection<? extends E> c) {
+        checkPositionIndex(index);
+
+        Object[] a = c.toArray();
+	//获取  要  插入的  集合  的 数量
+        int numNew = a.length;
+        if (numNew == 0)
+            return false;
+	//succ表示index位置的节点，pred表示succ的前一个节点
+        Node<E> pred, succ;
+	//添加到最后
+        if (index == size) {
+            succ = null;//index位置的节点为null，也就是succ为null
+	    //将  pred  这个指向  指向最后一个元素
+            pred = last;
+        } else {
+	    //index位置的节点
+            succ = node(index);
+	    //添加到pred和succ之间，所以要保存succ的前一个节点
+            pred = succ.prev;
+        }
+
+        for (Object o : a) {
+            @SuppressWarnings("unchecked") E e = (E) o;
+	    //创建节点，前一个是pred，后一个是null，后一个在下面在赋值
+            Node<E> newNode = new Node<>(pred, e, null);
+	    //前一个为null，说明原来链表是null的，让当前节点赋值first
+            if (pred == null)
+                first = newNode;
+            else
+	    //先连接前面的，后面的先不连，newNode的前一个节点在创建的时候就已经赋值，而他前一个的下一个节点在这地方赋值
+                pred.next = newNode;
+		//让当前节点成为前一个，然后不停的往后添加
+            pred = newNode;
+        }
+	//到目前为止，前面的节点都已经连接完了，后面的都还没连接
+        if (succ == null) {
+	    ////这个简单，如果添加到原节点的最后，直接让pred等于last就行的，因为pred是最后一个添加的节点
+            last = pred;
+        } else {
+	    ////如果不是添加到最后，需要最后添加的节点pred和succ连接起来即可。succ是pred的下一个节点，pred是succ的前一个节点
+            pred.next = succ;
+            succ.prev = pred;
+        }
+        ////增加size
+        size += numNew;
+        modCount++;
+        return true;
+    }
+
+Node<E> node(int index) {
+        // assert isElementIndex(index);
+	//根据index查找节点
+	//size >> 1  将size  分成两部分  index < (size >> 1)  表示前半部分
+        if (index < (size >> 1)) {
+            Node<E> x = first;
+            for (int i = 0; i < index; i++)
+		//一直查找  X的下一个  直到  index  位置的前一个
+		//那么此时该位置的下一个就是   index  对应的  元素
+                x = x.next;
+            return x;
+        } else {
+            Node<E> x = last;
+	    // 从最后位置开始  一直向上  追溯  直到  index  的后面一个元素
+            for (int i = size - 1; i > index; i--)
+                x = x.prev;
+            return x;
+        }
+    }
+
+public E peek() {
+        final Node<E> f = first;
+        return (f == null) ? null : f.item;
+    }
+
+public E element() {
+        return getFirst();
+    }
+
+public E poll() {
+        final Node<E> f = first;
+        return (f == null) ? null : unlinkFirst(f);
+    }
+
+public E remove() {
+        return removeFirst();
+    }
+
+public boolean offer(E e) {
+        return add(e);
+    }
+
+public boolean offerFirst(E e) {
+        addFirst(e);
+        return true;
+    }
+
+public E peekFirst() {
+        final Node<E> f = first;
+        return (f == null) ? null : f.item;
+}
+
+public E peekLast() {
+        final Node<E> l = last;
+        return (l == null) ? null : l.item;
+    }
+
+public E pollFirst() {
+        final Node<E> f = first;
+        return (f == null) ? null : unlinkFirst(f);
+    }
+
+public E pollLast() {
+        final Node<E> l = last;
+        return (l == null) ? null : unlinkLast(l);
+    }
+
+public void push(E e) {
+        addFirst(e);
+    }
+
+public E pop() {
+        return removeFirst();
+    }
+
+public boolean removeFirstOccurrence(Object o) {
+        return remove(o);
+    }
+
+public boolean removeLastOccurrence(Object o) {
+        if (o == null) {
+            for (Node<E> x = last; x != null; x = x.prev) {
+                if (x.item == null) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        } else {
+            for (Node<E> x = last; x != null; x = x.prev) {
+                if (o.equals(x.item)) {
+                    unlink(x);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+

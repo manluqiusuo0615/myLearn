@@ -1,0 +1,9 @@
+接口Queue继承了Collection接口
+boolean add(E e);
+boolean offer(E e);
+E remove();
+//检索并移除此队列的头
+E poll();
+E element();
+//检索，但不删除，这个队列头
+E peek();
