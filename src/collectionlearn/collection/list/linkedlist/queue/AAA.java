@@ -1,4 +1,4 @@
-package collectionlearn.linkedlist.queue;
+package collectionlearn.collection.list.linkedlist.queue;
 
 /**
  * @author 肖长路

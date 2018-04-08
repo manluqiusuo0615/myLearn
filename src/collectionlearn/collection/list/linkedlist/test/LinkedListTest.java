@@ -1,6 +1,6 @@
-package collectionlearn.linkedlist.test;
+package collectionlearn.collection.list.linkedlist.test;
 
-import collectionlearn.linkedlist.queue.AAA;
+import collectionlearn.collection.list.linkedlist.queue.AAA;
 
 import java.util.LinkedList;
 

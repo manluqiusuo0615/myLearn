@@ -1,4 +1,4 @@
-package collectionlearn.arrayList.abstractList.abstractCollection.test;
+package collectionlearn.collection.list.arrayList.abstractList.abstractCollection.test;
 
 /**
  * @author 肖长路
