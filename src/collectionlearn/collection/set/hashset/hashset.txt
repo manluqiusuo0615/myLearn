@@ -1,0 +1,7 @@
+HashSet类继承了AbstractSet抽象类,并且实现了
+Set,Cloneable,Serializable接口
+Set集合与List一样，都是继承自Collection接口，
+常用的实现类有HashSet和TreeSet。值得注意的是，
+HashSet是通过HashMap来实现的而TreeSet是通过
+TreeMap来实现的，
+所以HashSet和TreeSet都没有自己的数据结构
