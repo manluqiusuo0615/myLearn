@@ -8,6 +8,7 @@ import java.io.FileInputStream;
  * @create 2017-09-20 13:45
  */
 public class MySecurityManager extends SecurityManager{
+    @Override
     public void checkRead(String file) {
         if (file.endsWith("test")){
             throw new SecurityException("你没有读取的本文件的权限");
