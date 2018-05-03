@@ -42,5 +42,8 @@ public class CollectionLearn {
         //for(Integer one:set){
         //    System.out.println(one+"===="+map.get(one));
         //}
+
+        Map<String,String> hashMap = Collections.synchronizedMap(new HashMap());
+
     }
 }
