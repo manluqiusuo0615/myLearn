@@ -1,0 +1,6 @@
+HashMap不仅继承了AbstractMap，而且实现了Map、Cloneable和Serializable接口，
+所以HashMap也可以序列化
+
+HashMap是非同步的，但是我们可以通过Collections类
+的静态方法synchronizedMap获得线程安全的HashMap
+Map map = Collections.synchronizedMap(new HashMap());
