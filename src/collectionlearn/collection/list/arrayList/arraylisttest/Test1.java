@@ -43,8 +43,8 @@ public class Test1 {
         list.add(5);
         list.add(6);
 
-        list.removeIf(s ->s%2==0);
-        list.forEach(s ->System.out.println(s));
+        //list.removeIf(s ->s%2==0);
+        //list.forEach(s ->System.out.println(s));
 
 
     }
