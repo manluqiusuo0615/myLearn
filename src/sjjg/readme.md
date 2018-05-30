@@ -11,5 +11,13 @@ for the same reason why surgery is not called knife science.
 3段绳索的终点c,移动点c，将剩余的3+5段绳索拉直。
 ![Image text]( https://github.com/manluqiusuo0615/myLearn/blob/master/src/img/ssjsj.png)
 其实就是勾三股四玄五原理
-
+###第三节 尺规计算机  
+输入：任给平面上线段AB
+输出：将其三等分
+算法：从A发出一条与AB不重合的射线P
+在p上取AC=CD=DE，连接EB,
+经过D做EB平行线，交于AB与F
+经过C做EB平行线，交于AB与G
+![Image text]( https://github.com/manluqiusuo0615/myLearn/blob/master/src/img/cgjs.png)
+其实就是平行等比原理
 
