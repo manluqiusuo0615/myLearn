@@ -9,6 +9,7 @@ for the same reason why surgery is not called knife science.
 算法：取12段等长的绳索，首尾连接成环，从A点起，
 将4段绳索沿l伸直并固定于B，沿着另一个方向找到第
 3段绳索的终点c,移动点c，将剩余的3+5段绳索拉直。
-
+![Image text]( https://github.com/manluqiusuo0615/myLearn/blob/master/src/img/ssjsj.png)
+其实就是勾三股四玄五原理
 
 
