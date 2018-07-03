@@ -24,7 +24,8 @@ public class ExcelCz {
         HSSFRow row = sheet.createRow((int) 0);
         // 第四步，创建单元格，并设置值表头 设置表头居中
         HSSFCellStyle style = wb.createCellStyle();
-        style.setAlignment(HSSFCellStyle.ALIGN_CENTER); // 创建一个居中格式
+        // 创建一个居中格式
+        style.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
         HSSFCell cell = row.createCell((short) 0);
         cell.setCellValue("sql语句ID");
