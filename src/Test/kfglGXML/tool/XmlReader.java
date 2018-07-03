@@ -50,7 +50,6 @@ public class XmlReader {
         Iterator<Element> iterator = node.elementIterator();
         while(iterator.hasNext()){
             Element e = iterator.next();
-            String str = null;
             if(!e.getName().equals("typeAlias")){
                 XmlEntity xmlEntity = new XmlEntity();
                 xmlEntity.setSql_id(e.attribute("id").getValue());
