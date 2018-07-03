@@ -1,8 +1,7 @@
 package objectOptions;
 
-import org.apache.poi.ss.formula.functions.T;
-
 import java.lang.reflect.Field;
+import java.util.List;
 
 /**
  * @Description 对象操作
@@ -86,7 +85,19 @@ public class ObjectOptions {
         }
         return t1;
     }
-
+    /**
+     *@description: 将一个集合数据转换成指定的对象集合数据
+     *@param: fields 属性名称集合
+     *@param: values 存储了数据的集合
+     *@param: obj 指定的对象
+     *@return: java.util.List
+     *@author: 肖长路
+     *@createTime:2018 年 06 月 27 日 10:14
+     */
+    //public static List listToObj (List<String> fields,List<List<String>> values,Object obj){
+    //
+    //
+    //}
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         Testcc testcc = new Testcc();

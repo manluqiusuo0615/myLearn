@@ -20,4 +20,18 @@ for the same reason why surgery is not called knife science.
 经过C做EB平行线，交于AB与G
 ![Image text]( https://github.com/manluqiusuo0615/myLearn/blob/master/src/img/cgjs.png)
 其实就是平行等比原理
-
+###第四节 算法  
+计算=信息处理
+借助某种工具，遵循一定规则，以明确而机械的形式进行
+计算模型=计算机=信息处理工具
+所谓算法，即特定计算模型下，旨在解决特定问题的指令序列   
+ 输入    待处理的信息（问题）  
+ 输出    经处理的信息（答案）  
+正确性   的确可以解决指定的问题  
+确定性   任一算法都可以描述为一个由基本操作组成的序列  
+可行性   每一基本操作都可实现，且在常数时间内完成  
+有穷性   对于任何输入，经有穷次基本操作，都可以得到输出  
+###第五节 有穷性  
+序列Hailstone(n) = {1}                  n<=1  
+序列Hailstone(n) = {n}UHailstone(n/2)   n偶  
+序列Hailstone(n) = {n}UHailstone(3n+2)  n奇  
