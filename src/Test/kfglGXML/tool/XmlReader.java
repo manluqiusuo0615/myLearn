@@ -27,7 +27,7 @@ public class XmlReader {
             reader.listNodes(reader.XmlReader(one));
         }
 
-        ExcelCz.saveExcel(reader.list,"D:\\sfyw.xlsx");
+        ExcelCz.saveExcel(reader.list,"D:\\sfyw.xls");
     }
     private Element XmlReader(File file){
         //创建SAXReader对象
