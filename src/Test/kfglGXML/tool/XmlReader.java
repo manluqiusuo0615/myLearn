@@ -18,7 +18,7 @@ public class XmlReader {
     private List<XmlEntity> list = new ArrayList<XmlEntity>();
     
     public static void main(String[] args) {
-        File file = new File("D:\\tempKFGLXML");
+        File file = new File("D:\\sfyw");
         File[] files = file.listFiles();
 
         XmlReader reader = new XmlReader();
@@ -27,7 +27,7 @@ public class XmlReader {
             reader.listNodes(reader.XmlReader(one));
         }
 
-        ExcelCz.saveExcel(reader.list,"D:\\tempSqlxq.xlsx");
+        ExcelCz.saveExcel(reader.list,"D:\\sfyw.xlsx");
     }
     private Element XmlReader(File file){
         //创建SAXReader对象
