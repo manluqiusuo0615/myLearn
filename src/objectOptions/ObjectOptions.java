@@ -1,6 +1,9 @@
 package objectOptions;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.List;
 
 /**
@@ -98,6 +101,51 @@ public class ObjectOptions {
     //
     //
     //}
+
+    /**
+     *@description: 对指定对象的指定属性赋值
+     *@param: attributes 指定属性
+     *@param: values 所赋的值
+     *@param: t 指定的对象Class
+     *@return: T 返回指定的类型对象
+     *@author: 肖长路
+     *@createTime:2018 年 07 月 04 日 15:03
+     */
+    public static <T> T propertyOption(String[] attributes,Object[] values,Class<T> t){
+        T result = null;
+        try {
+            result = t.newInstance();
+            for(int i=0;i<attributes.length;i++){
+                Field field;
+                try {
+                    field = t.getField(attributes[i]);
+                } catch (NoSuchFieldException e) {
+                    try {
+                        field = t.getDeclaredField(attributes[i]);
+                    } catch (NoSuchFieldException e1) {
+                        throw new RuntimeException("该类不存在"+attributes[i]+"属性!");
+                    }
+                }
+                if (Modifier.isFinal(field.getModifiers())){
+                    continue;
+                }
+                //将属性的首字符大写，方便构造get，set方法
+                String setMethodName = "set"+ attributes[i].substring(0,1).toUpperCase()+attributes[i].substring(1);
+                Method setMethod = t.getMethod(setMethodName,new Class[]{field.getType()});
+                //给创建的对象赋值
+                setMethod.invoke(result,new Object[]{values[i]});
+            }
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
 
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException {
         Testcc testcc = new Testcc();
