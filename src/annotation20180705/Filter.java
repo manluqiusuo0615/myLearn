@@ -1,4 +1,4 @@
-package org;
+package annotation20180705;
 @TableAnnotation("filter")
 public class Filter {
 	@FieldAnnotation("ID")

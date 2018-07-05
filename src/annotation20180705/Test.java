@@ -1,4 +1,4 @@
-package org;
+package annotation20180705;
 
 public class Test {
 

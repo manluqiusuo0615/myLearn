@@ -1,4 +1,4 @@
-package org;
+package annotation20180705;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
