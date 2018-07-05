@@ -24,7 +24,7 @@ public class AnnotationParsingUtile {
 			return null ;
 		}
 		//返回改程序元素上存在的,指定类型的注解,如果该类型注解不存在,则返回null
-		TableAnnotation t = (TableAnnotation)clazz.getAnnotation(TableAnnotation.class);
+		TableAnnotation t = clazz.getAnnotation(TableAnnotation.class);
 		String tableName = t.value();
 		
 		sb.append("select * from ").append(tableName).append(" where 1=1 ");
