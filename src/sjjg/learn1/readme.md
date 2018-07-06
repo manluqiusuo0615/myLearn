@@ -21,7 +21,7 @@ for the same reason why surgery is not called knife science.
 ![Image text]( https://github.com/manluqiusuo0615/myLearn/blob/master/src/img/cgjs.png)
 其实就是平行等比原理
 ###第四节 算法  
-计算=信息处理
+计算=信息处理(计算的过程是一个信息收集的过程)
 借助某种工具，遵循一定规则，以明确而机械的形式进行
 计算模型=计算机=信息处理工具
 所谓算法，即特定计算模型下，旨在解决特定问题的指令序列   
@@ -35,3 +35,4 @@ for the same reason why surgery is not called knife science.
 序列Hailstone(n) = {1}                  n<=1  
 序列Hailstone(n) = {n}UHailstone(n/2)   n偶  
 序列Hailstone(n) = {n}UHailstone(3n+2)  n奇  
+Hailstone(42) = {42,21,64,32,......,1}
