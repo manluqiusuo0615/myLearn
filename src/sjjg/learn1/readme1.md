@@ -36,3 +36,42 @@ for the same reason why surgery is not called knife science.
 序列Hailstone(n) = {n}UHailstone(n/2)   n偶  
 序列Hailstone(n) = {n}UHailstone(3n+2)  n奇  
 Hailstone(42) = {42,21,64,32,......,1}
+```
+public static int getHailstoneLength(int num){
+    List<Integer> list = new ArrayList<>();
+    list.add(num);
+    int length = 1;
+    while(1<num){
+        if(num%2!=0){
+            num=3*num+1;
+        }else{
+            num=num/2;
+        }
+        list.add(num);
+        length++;
+    }
+    for(Integer one:list){
+        System.out.print(" "+one+" ");
+    }
+    return length;
+}
+public static void main(String[] args) {
+    System.out.println("长度为:"+getHailstoneLength(27));
+}
+```
+对于任意的 n 总有 getHailstoneLength(n) < 无穷  ？
+这个不取决于这个程序，而是取决于这个序列本身的定义
+
+程序未必是算法。
+所谓的程序，是你作为人，去指挥计算机的途径，也是你和计算机相互沟通的一个渠道。  
+程序语言也是和自然语言一样，需要进行交流沟通的，所以可读性是非常强调的一条。  
+最最重要的是效率:速度尽可能快；存储空间尽可能少 
+Algorithms + Data Structrues = programs
+ (Algorithms + Data Structrues) X Efficiency = Computation
+ 算法 + 数据结构  =======  DSA
+
+
+
+
+
+

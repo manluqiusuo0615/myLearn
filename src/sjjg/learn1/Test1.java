@@ -12,7 +12,8 @@ public class Test1 {
 
     public static int getHailstoneLength(int num){
         List<Integer> list = new ArrayList<>();
-        int length = 0;
+        list.add(num);
+        int length = 1;
         while(1<num){
             if(num%2!=0){
                 num=3*num+1;
@@ -28,6 +29,6 @@ public class Test1 {
         return length;
     }
     public static void main(String[] args) {
-        System.out.println("长度为:"+getHailstoneLength(1));
+        System.out.println("长度为:"+getHailstoneLength(27));
     }
 }
