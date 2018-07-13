@@ -29,7 +29,7 @@ public class Client {
         //Proxy.newProxyInstance()方法生成的实例既不是
         //RealSubject实例,也不是DynamicSubject实例
         //它是在运行期间动态所生成的那个类的实例
-        //com.sun.proxy.$Proxy0这个类的实例
+        //com.sun.aproxy2080705.$Proxy0这个类的实例
         //而生成的这个类,它有以下特点,它实现了realSubject.getClass().getInterfaces()
         //这些接口,即realSubject所实现的那些接口
         //System.out.println("************"+realSubject.getClass().getInterfaces().getClass());

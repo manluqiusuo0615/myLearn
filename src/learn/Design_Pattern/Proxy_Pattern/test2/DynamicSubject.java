@@ -20,7 +20,7 @@ public class DynamicSubject implements InvocationHandler{
     @Override
     /**
      * proxy这个对象是代理这个实例本身
-     * com.sun.proxy.$Proxy0这个类的实例
+     * com.sun.aproxy2080705.$Proxy0这个类的实例
      * method要去调用的真实对象的那个方法的Method对象
      */
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
