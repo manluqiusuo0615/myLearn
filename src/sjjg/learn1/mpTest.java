@@ -1,9 +1,9 @@
 package sjjg.learn1;
 
 /**
- * @author Ð¤³¤Â·
+ * @author Ð¤ï¿½ï¿½Â·
  * @description
- * @date 2018Äê07ÔÂ10ÈÕ 19:39
+ * @date 2018ï¿½ï¿½07ï¿½ï¿½10ï¿½ï¿½ 19:39
  */
 public class mpTest {
 
